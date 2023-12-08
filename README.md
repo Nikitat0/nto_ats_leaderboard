@@ -24,6 +24,4 @@ poetry run python main.py
 
 ## Deployment
 
-```
-railway up
-```
+Using Docker
