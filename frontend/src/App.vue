@@ -77,6 +77,11 @@ const max_scores = [15, 40, 30, 15];
         <a class="link-dark" href="https://github.com/zaborshikov"
           >zaborshikov</a
         >
+        <br>
+        Forked by
+        <a class="link-dark" href="https://github.com/Nikitat0"
+          >Nikitat0</a
+        >
       </div>
     </div>
     <div v-else class="text-center mt-5">

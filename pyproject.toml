@@ -2,7 +2,10 @@
 name = "nto-ats-leaderboard"
 version = "0.1.0"
 description = ""
-authors = ["AlanTheKnight <51376126+AlanTheKnight@users.noreply.github.com>"]
+authors = [
+    "AlanTheKnight <51376126+AlanTheKnight@users.noreply.github.com>",
+    "Nikitat0 <nikitatzero@yandex.ru>",
+]
 license = "MIT"
 
 [tool.poetry.dependencies]
