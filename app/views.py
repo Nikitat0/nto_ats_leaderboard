@@ -9,25 +9,27 @@ cache: Union[None, Tuple[datetime.timedelta, list]] = None
 
 
 def get_task_scores(task: int):
-    data = pd.read_html(f"https://sim.avt.global/public/{task}")[-1].iloc[:, :4]
+    data = pd.read_html(
+        f"https://sim.avt.global/public/{task}")[-1].iloc[:, :4]
     data.fillna("[NAN]", inplace=True)
     teams = [i for i in data["Команда"] if str(i) != "nan"]
     return (
-        {i: max(data[data["Команда"] == i]["Очки"]) for i in teams},
-        {i: list(data[data["Команда"] == i]["Участник"]) for i in teams},
+        {team: max(data[data["Команда"] == team]["Очки"]) for team in teams},
+        {team: list(data[data["Команда"] == team]["Участник"])
+         for team in teams},
     )
 
 
 def get_leaderboard():
     response = []
     score, teams, teams_tasks = {}, {}, {}
-    for i in ((100, 15), (101, 40), (102, 30), (103, 15)):
-        data = get_task_scores(i[0])
-        for j in data[0].items():
-            teams[j[0]] = teams.get(j[0], set()) | set(list(data[1][j[0]]))
-            score[j[0]] = score.get(j[0], 0) + i[1] * j[1]
-            teams_tasks[j[0]] = teams_tasks.get(j[0], ["0"] * 4)
-            teams_tasks[j[0]][i[0] % 10] = i[1] * j[1]
+    for task, task_value in ((123, 35), (124, 15), (125, 15), (126, 20), (127, 15)):
+        team_scores, members, = get_task_scores(task)
+        for team, team_score in team_scores.items():
+            teams[team] = teams.get(team, set()) | set(list(members[team]))
+            score[team] = score.get(team, 0) + task_value * team_score
+            teams_tasks[team] = teams_tasks.get(team, ["0"] * 5)
+            teams_tasks[team][(task % 10) - 3] = task_value * team_score
     response = [
         {
             "task_scores": teams_tasks[team],

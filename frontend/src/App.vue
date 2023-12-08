@@ -19,7 +19,7 @@ onMounted(async () => (leaderboard.value = await getLeaderboard()));
 
 const round = (num) => Math.round((num + Number.EPSILON) * 100) / 100;
 
-const max_scores = [15, 40, 30, 15];
+const max_scores = [35, 15, 15, 20, 15];
 </script>
 
 <template>
@@ -30,7 +30,7 @@ const max_scores = [15, 40, 30, 15];
         <thead>
           <tr>
             <th colspan="3"></th>
-            <th colspan="4">Задачи</th>
+            <th colspan="5">Задачи</th>
             <th></th>
           </tr>
           <tr>
@@ -41,6 +41,7 @@ const max_scores = [15, 40, 30, 15];
             <th>2</th>
             <th>3</th>
             <th>4</th>
+            <th>5</th>
             <th>Участники</th>
           </tr>
         </thead>
