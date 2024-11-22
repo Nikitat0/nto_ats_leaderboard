@@ -23,13 +23,13 @@ def get_task_scores(task: int):
 def get_leaderboard():
     response = []
     score, teams, teams_tasks = {}, {}, {}
-    for task, task_value in ((123, 35), (124, 15), (125, 15), (126, 20), (127, 15)):
+    for task, task_value in ((138, 20), (139, 10), (140, 35), (141, 20), (142, 15)):
         team_scores, members, = get_task_scores(task)
         for team, team_score in team_scores.items():
             teams[team] = teams.get(team, set()) | set(list(members[team]))
             score[team] = score.get(team, 0) + task_value * team_score
             teams_tasks[team] = teams_tasks.get(team, ["0"] * 5)
-            teams_tasks[team][(task % 10) - 3] = task_value * team_score
+            teams_tasks[team][task - 138] = task_value * team_score
     response = [
         {
             "task_scores": teams_tasks[team],
